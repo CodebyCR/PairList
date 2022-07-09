@@ -137,7 +137,40 @@ public class PairList<T1, T2> extends ArrayList<Pair<T1, T2>> {
     }
 
     /**
-     * Merge all pairs with the same key and separats the values by "<b>,</b>".
+     * This methode is similar to <b>if(list.contains(pair_1) && list.contains(pair_2) && ...) </b>,
+     * but it's more performant and easier to read.
+     * @param pairs
+     * @return if this list contains all the given pairs it's true, else it's false.
+     */
+    public boolean containsAllOf(Pair<T1, T2>... pairs) {
+        for(Pair<T1, T2> currentPair : pairs) {
+            if(!this.contains(currentPair)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * This methode is similar to <b>if(list.contains(pair_1) || list.contains(pair_2) || ...) </b>,
+     * but it's more performant and easier to read.
+     * @param pairs
+     * @return if this list contains at least one of the given pairs it's true, else it's false.
+     */
+    public boolean containsOneOf(Pair<T1, T2>... pairs) {
+        for(Pair<T1, T2> currentPair : pairs) {
+            if(this.contains(currentPair)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+    /**
+     * Merge all pairs with the same key and separates the values by "<b>,</b>".
      * If they the same, only one pair leaves in the list.
      * @param key
      * @return true if pairs merged at least one time.
